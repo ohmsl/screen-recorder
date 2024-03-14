@@ -1,24 +1,30 @@
 use std::io;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use std::process::Command;
 
-/// Captures a screenshot of the entire desktop and saves it to the specified file.
+/// Captures a screenshot of a specified window and saves it to the specified file.
 ///
 /// # Arguments
 ///
 /// * `output_file` - A string slice that holds the name of the output file.
+/// * `window_title` - The title of the window to capture.
+/// * `output_format` - The output format (e.g., "png").
 ///
 /// # Example
 ///
 /// ```rust
-/// capture_screenshot("screenshot.png").expect("Failed to capture screenshot");
+/// capture_screenshot("window_capture.png", "Calculator", "png").expect("Failed to capture screenshot");
 /// ```
 ///
 /// # Errors
 ///
 /// This function will return an `io::Error` if FFmpeg fails to start or if there is a problem
 /// capturing the screenshot.
-pub fn capture_screenshot(output_file: &str) -> io::Result<String> {
+pub fn capture_screenshot(
+    output_file: &str,
+    window_title: &str,
+    output_format: &str,
+) -> io::Result<String> {
     let mut index = 0;
     let mut screenshot_path = PathBuf::from(output_file);
 
@@ -30,17 +36,28 @@ pub fn capture_screenshot(output_file: &str) -> io::Result<String> {
             screenshot_path.with_file_name(format!("{}_{}.{}", file_name, index, file_extension));
     }
 
-    Command::new("ffmpeg")
+    let command_output = Command::new("ffmpeg")
         .args([
             "-f",
-            "gdigrab", // Use the GDI grabber on Windows to capture the screen
+            "gdigrab",
             "-i",
-            "desktop", // Specify the input as the desktop screen
+            &format!("title={}", window_title), // Specify the window title
             "-vframes",
             "1",                               // Capture only one frame (a screenshot)
-            screenshot_path.to_str().unwrap(), // The output file path and name
+            screenshot_path.to_str().unwrap(), // The output file path and name, determines format
         ])
-        .output()?; // Execute the FFmpeg command and wait for it to finish
+        .output()?;
+
+    if !command_output.status.success() {
+        println!(
+            "FFmpeg failed to capture the window: {}",
+            String::from_utf8_lossy(&command_output.stderr)
+        );
+        return Err(io::Error::new(
+            io::ErrorKind::Other,
+            "FFmpeg failed to capture the window.",
+        ));
+    }
 
     println!("Screenshot saved to {}", screenshot_path.to_str().unwrap());
     Ok(screenshot_path.to_str().unwrap().to_string())

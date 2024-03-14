@@ -464,6 +464,21 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.1.tgz#16308cea045f0fc777b6ff20a9f25474dd8293d2"
   integrity sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==
 
+"@fontsource/dm-sans@^5.0.19":
+  version "5.0.19"
+  resolved "https://registry.yarnpkg.com/@fontsource/dm-sans/-/dm-sans-5.0.19.tgz#28c3ccbc66d5d65113f7e8e0e1a2df1944ff13eb"
+  integrity sha512-gQC7cT/d169guzdmoRatxiqkARjrf4gszqzdTRlWdaBZhwxxMMaKgq3lzq6roYpGgcqp1urgAUsI1p6zeiNRMQ==
+
+"@fontsource/noto-sans@^5.0.21":
+  version "5.0.21"
+  resolved "https://registry.yarnpkg.com/@fontsource/noto-sans/-/noto-sans-5.0.21.tgz#e741347df27ee2d8d7c1f26c56ada49516004784"
+  integrity sha512-1rIZsv6nObjg0rNY0EBBTta5lujmQ1agKn6HN5rY3L2pVvHJqK5n/cNO2HTqfqK837f9PEE/yowVm9mjniDhuw==
+
+"@fontsource/poppins@^5.0.12":
+  version "5.0.12"
+  resolved "https://registry.yarnpkg.com/@fontsource/poppins/-/poppins-5.0.12.tgz#f1e53d2a6b987cf7f186114f9711aba0c66d3848"
+  integrity sha512-0qzBxtIJLh82iMJ9pCXKYwGs1zyS+jyUmwVJ59+JdYnEaFVkDsxVOk9yDWfVOs14ALUneodU2m5YSGma6dCYCw==
+
 "@jridgewell/gen-mapping@^0.3.2", "@jridgewell/gen-mapping@^0.3.5":
   version "0.3.5"
   resolved "https://registry.yarnpkg.com/@jridgewell/gen-mapping/-/gen-mapping-0.3.5.tgz#dcce6aff74bdf6dad1a95802b69b04a2fcb1fb36"
